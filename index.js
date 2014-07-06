@@ -19,6 +19,9 @@ module.exports = function (opts) {
   };
 
   return es.map(function (file, cb) {
+    if(file.isNull()){
+      return  cb(null, file);
+    }  
     try {
       file.contents = new Buffer(htmlmin.minify(String(file.contents), opts));
     } catch (err) {
